@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Proga for BSU/Lab--3/main.cpp
+iostream
+-
+iomanip
+-
+conio.h
+-
+vector
+-
+cstdlib
+-
+ctime
+-
+
