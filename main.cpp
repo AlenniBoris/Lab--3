@@ -76,26 +76,31 @@ void SumWithoutZero(int size,vector<vector<int>>& matrix){
 }
 void DiagMultiply(int size,vector<vector<int>>& matrix){
     int rez = 1;
-    int mult = 0;
     int y;
+    int sravn = 0;
     for(int b = 1;b < (size-1);b++){
         for(int u = b,y = 0;u < size;u++,y++)
         {
             rez*=matrix[y][u];
         }
+        if (rez > sravn){
+            swap(rez, sravn);;
+        }
     }
     int mult1 = 1;
     int c;
-    int mult2 = 0;
     for(int b = 1;b < (size-1);b++){
         for(int v =0 ,c = b;c < size;c++,v++){
             mult1*=matrix[c][v];
         }
-    }
-    if(mult1>rez){
-        cout<<"The max product of the elements of diagonals parallel to the main: "<<mult1;
+        if (mult1 > sravn){
+            swap(mult1, sravn);;
+        }
     }
 
+    if(sravn>rez){
+        cout<<"The max product of the elements of diagonals parallel to the main: "<<sravn;
+    }
     else{
         cout<<"The max product of the elements of diagonals parallel to the main: "<<rez;
     }
