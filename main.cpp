@@ -7,6 +7,9 @@
 
 using namespace std;
 
+
+
+
 void RandomMatrix(int size,vector<vector<int>>& matrix){
     srand(time(NULL));
     int max;
@@ -106,18 +109,8 @@ void DiagMultiply(int size,vector<vector<int>>& matrix){
     }
 
 }
-
-int main() {
+void fillingMatrix(int size,vector<vector<int>>& matrix){
     int choise;
-    int size;
-    cout << "Enter size of your vector:";
-    cin >> size;
-    while(size <= 0 || size > 11){
-        cout << "Size has to be positive and less than eleven :";
-        cin >> size;
-    }
-
-    vector< vector <int> >matrix(size,vector <int> (size));
     cout << "You want to fill  by hands?(Yes(Enter 1) or No(Enter 0)) :";
     cin >> choise;
     while (choise < 0 || choise > 1){
@@ -126,12 +119,24 @@ int main() {
     }
     if (choise == 1){
         HandsMatrix(size, matrix);
+
     }
     if (choise == 0){
         RandomMatrix(size, matrix);
+
     }
+}
+int main() {
+    int size;
+    cout << "Enter size of your vector:";
+    cin >> size;
+    while(size <= 0 || size > 11){
+        cout << "Size has to be positive and less than eleven :";
+        cin >> size;
+    }
+    vector< vector <int> >matrix(size,vector <int> (size));
+    fillingMatrix(size,matrix);
     SumWithoutZero(size,matrix);
     DiagMultiply(size, matrix);
-
     return 0;
 }
