@@ -83,25 +83,17 @@ void DiagMultiply(int size,vector<vector<int>>& matrix){
         {
             rez*=matrix[y][u];
         }
-        if(rez > mult){
-            swap(rez, mult);
-        }
-        rez=1;
     }
     int mult1 = 1;
     int c;
     int mult2 = 0;
-    for(int b = 1;b<(size-1);b++){
+    for(int b = 1;b < (size-1);b++){
         for(int v =0 ,c = b;c < size;c++,v++){
             mult1*=matrix[c][v];
         }
-        if(mult1>mult2){
-            swap(mult1,mult2);
-        }
-        mult1=1;
     }
-    if(mult2>rez){
-        cout<<"The max product of the elements of diagonals parallel to the main: "<<mult2;
+    if(mult1>rez){
+        cout<<"The max product of the elements of diagonals parallel to the main: "<<mult1;
     }
 
     else{
