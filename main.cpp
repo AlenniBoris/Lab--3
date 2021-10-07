@@ -10,8 +10,8 @@ using namespace std;
 void RandomMatrix(int size,vector<vector<int>>& matrix){
     srand(time(NULL));
     int max;
-    cout<<"Enter a max matrix element: ";
-    cin>>max;
+    cout<<"Enter a max matrix element: " << endl;
+    cin >> max;
     for(int i = 0; i < size; i++){
         cout<<"|";
         for(int j = 0; j < size; j++){
@@ -20,7 +20,7 @@ void RandomMatrix(int size,vector<vector<int>>& matrix){
             {
                 matrix[i][j]=1;
             }
-            cout<<setw(6)<<matrix[i][j]<<"  ";
+            cout << setw(6) << matrix[i][j] << "    ";
         }
         cout<<"|";
         cout<<endl;
@@ -36,7 +36,7 @@ void HandsMatrix(int size,vector<vector<int>>& matrix){
                 q++;
             }
             else{
-                cout<< "\nEnter matrix elements";
+                cout<< "\nEnter matrix elements: "<< endl;
                 cin>>matrix[i][j];
             }
         }
@@ -78,7 +78,6 @@ void DiagMultiply(int size,vector<vector<int>>& matrix){
     int rez = 1;
     int mult = 0;
     int y;
-
     for(int b = 1;b < (size-1);b++){
         for(int u = b,y = 0;u < size;u++,y++)
         {
@@ -93,7 +92,7 @@ void DiagMultiply(int size,vector<vector<int>>& matrix){
     int c;
     int mult2 = 0;
     for(int b = 1;b<(size-1);b++){
-        for(int v =0 ,c= b;c<size;c++,v++){
+        for(int v =0 ,c = b;c < size;c++,v++){
             mult1*=matrix[c][v];
         }
         if(mult1>mult2){
@@ -116,11 +115,10 @@ int main() {
     int size;
     cout << "Enter size of your vector:";
     cin >> size;
-    while(size < 0 || size > 11){
+    while(size <= 0 || size > 11){
         cout << "Size has to be positive and less than eleven :";
         cin >> size;
     }
-
 
     vector< vector <int> >matrix(size,vector <int> (size));
     cout << "You want to fill  by hands?(Yes(Enter 1) or No(Enter 0)) :";
