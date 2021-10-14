@@ -7,9 +7,6 @@
 
 using namespace std;
 
-
-
-
 void RandomMatrix(int size,vector<vector<int>>& matrix){
     srand(time(NULL));
     int max;
