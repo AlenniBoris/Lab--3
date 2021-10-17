@@ -123,7 +123,6 @@ void fillingMatrix(int size,vector<vector<int>>& matrix){
     }
     if (choise == 0){
         RandomMatrix(size, matrix);
-
     }
 }
 int main() {
