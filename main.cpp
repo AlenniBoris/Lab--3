@@ -1,5 +1,4 @@
 #include <iostream>
-#include<iomanip>
 #include<conio.h>
 #include<vector>
 #include<cstdlib>
@@ -7,104 +6,51 @@
 
 using namespace std;
 
+void printMatrix(const vector<vector<int>>& matrix);
 void RandomMatrix(int size,vector<vector<int>>& matrix){
     srand(time(NULL));
     int max;
     cout<<"Enter a max matrix element: " << endl;
     cin >> max;
-    for(int i = 0; i < size; i++){
-        cout<<"|";
-        for(int j = 0; j < size; j++){
-            matrix[i][j]=rand() % max;
-            if((i+j)%2!=0)
-            {
-                matrix[i][j]=1;
+    if (size % 2 == 0){
+        for (int i = 0; i < size; i++){
+            for (int j = 0; j < (size / 2); j++){
+                int dull = rand() % max;
+                matrix[i].push_back(dull);
             }
-            cout << setw(6) << matrix[i][j] << "    ";
         }
-        cout<<"|";
-        cout<<endl;
     }
+    else {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < (size / 2) + i % 2; j++) {
+                int dull = rand() % max;
+                matrix[i].push_back(dull);
+            }
+        }
+    }
+    printMatrix(matrix);
 }
 void HandsMatrix(int size,vector<vector<int>>& matrix){
-    int q=1;
-    for(int i = 0; i < size; i++){
-        for(int j = 0; j < size; j++){
-            if((i+j)%2!=0)
-            {
-                matrix[i][j]=1;
-                q++;
-            }
-            else{
-                cout<< "\nEnter matrix elements: "<< endl;
-                cin>>matrix[i][j];
-            }
-        }
-    }
-    for(int k = 0;k < size;k++){
-            cout<<"|";
-            for(int h = 0;h < size;h++)
-            {
-                cout<<setw(6)<<matrix[k][h]<<"  ";
-            }
-           cout<<"|"<<endl;
-        }
-}
-void SumWithoutZero(int size,vector<vector<int>>& matrix){ //bbbb
-        int pos = 0;
-        int sum = 0;
-        for(int i =0;i<size;i++)
-        {
-            for(int j =0;j<size;j++)
-            {
-                if(matrix[i][j]==0)
-                {
-                    pos++;
+    if (size % 2 == 0){
+        for (int i = 0; i < size; i++){
+            for (int j = 0; j < (size / 2); j++){
+                int save;
+                cout << "Enter numbers: " << endl;
+                cin >> save;
+                matrix[i].push_back(save);
                 }
             }
-            if(pos==0)
-            {
-                for(int t=0;t<size;t++)
-                {
-                    sum=sum + matrix[i][t];
-                }
-                cout<<"Sum of "<<(i+1)<<" row: "<<sum<<endl;
-                sum = 0;
+        }
+        else {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < (size / 2) + i % 2; j++) {
+                int save;
+                cin >> save;
+                matrix[i].push_back(save);
             }
-            pos= 0;
-        }
-}
-void DiagMultiply(int size,vector<vector<int>>& matrix){
-    int rez = 1;
-    int y;
-    int sravn = 0;
-    for(int b = 1;b < (size-1);b++){
-        for(int u = b,y = 0;u < size;u++,y++)
-        {
-            rez*=matrix[y][u];
-        }
-        if (rez > sravn){
-            swap(rez, sravn);;
         }
     }
-    int mult1 = 1;
-    int c;
-    for(int b = 1;b < (size-1);b++){
-        for(int v =0 ,c = b;c < size;c++,v++){
-            mult1*=matrix[c][v];
-        }
-        if (mult1 > sravn){
-            swap(mult1, sravn);;
-        }
-    }
-
-    if(sravn>rez){
-        cout<<"The max product of the elements of diagonals parallel to the main: "<<sravn;
-    }
-    else{
-        cout<<"The max product of the elements of diagonals parallel to the main: "<<rez;
-    }
-
+    printMatrix(matrix);
 }
 void fillingMatrix(int size,vector<vector<int>>& matrix){
     int choise;
@@ -120,6 +66,74 @@ void fillingMatrix(int size,vector<vector<int>>& matrix){
     }
     if (choise == 0){
         RandomMatrix(size, matrix);
+    }
+}
+int getValue(const vector<vector<int>>& matrix, const int x, const int y){
+    if ((x + y) % 2 != 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return matrix[x][y / 2];
+    }
+}
+void SumWithoutZero(int size,vector<vector<int>>& matrix){ //bbbb
+    int pos = 0;
+    int sum = 0;
+    for(int i =0;i<size;i++){
+        for(int j =0;j<size;j++){
+            if(matrix[i][j]==0){
+                pos++;
+            }
+        }
+        if(pos==0){
+            for(int t=0;t<size;t++){
+                sum=sum + matrix[i][t];
+            }
+            cout<<"Sum of "<<(i+1)<<" row: "<<sum<<endl;
+            sum = 0;
+        }
+        pos= 0;
+    }
+}
+void DiagMultiply(int size,vector<vector<int>>& matrix){
+    int rez = 1;
+    int y;
+    int sravn = 0;
+    for(int b = 1;b < (size-1);b++){
+        for(int u = b,y = 0;u < size;u++,y++){
+            rez*=matrix[y][u];
+        }
+        if (rez > sravn){
+            swap(rez, sravn);;
+        }
+    }
+    int mult1 = 1;
+    int c;
+    for(int b = 1;b < (size-1);b++){
+        for(int v =0 ,c = b;c < size;c++,v++){
+            mult1*=matrix[c][v];
+        }
+        if (mult1 > sravn){
+            swap(mult1, sravn);
+        }
+    }
+    if(sravn>rez){
+        cout<<"The max product of the elements of diagonals parallel to the main: "<<sravn;
+    }
+    else{
+        cout<<"The max product of the elements of diagonals parallel to the main: "<<rez;
+    }
+}
+void printMatrix(const vector<vector<int>>& matrix){
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = 0; j < matrix.size(); j++)
+        {
+            cout << getValue(matrix, i, j) << " ";
+        }
+        cout << endl;
     }
 }
 int main() {
